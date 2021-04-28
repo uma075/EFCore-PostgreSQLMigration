@@ -5,11 +5,11 @@ using Sql.EFCoreMigration;
 namespace Sql.EFCoreMigration
 {
     // This class is only here for migrations
-    public class UserEntitiesFactory : IDesignTimeDbContextFactory<UserEntities>
+    public class UserEntitiesFactory : IDesignTimeDbContextFactory<UserEntitiesContext>
     {
-        public UserEntities CreateDbContext(string[] args)
+        public UserEntitiesContext CreateDbContext(string[] args)
         {
-            var optionsBuilder = new DbContextOptionsBuilder<UserEntities>();
+            var optionsBuilder = new DbContextOptionsBuilder<UserEntitiesContext>();
             if (args != null && args[0].Equals("Npgsql", System.StringComparison.InvariantCultureIgnoreCase))
             {
                 optionsBuilder.UseNpgsql("Server=127.0.0.1;Port=5432;Database=postgres;User Id=postgres;Password=123456;");
@@ -19,7 +19,7 @@ namespace Sql.EFCoreMigration
                 optionsBuilder.UseSqlServer("Data Source =.; Initial Catalog = MigrationDB; Integrated Security = True");
             }
 
-            return new UserEntities(optionsBuilder.Options);
+            return new UserEntitiesContext(optionsBuilder.Options);
         }
     }
 }
